@@ -2,88 +2,77 @@
 
 ---
 
-## JSON Fundamentals (Answers 1-10)
+## Section A: Multiple Choice Answers (1-50)
 
-**A1.** .json
+### JSON Fundamentals
 
-**A2.** b) Comma (,)
-(Commas separate multiple key-value pairs within an object.)
+**A1.** b) .json
 
-**A3.** While JSON supports unlimited nesting, it's recommended to keep nesting to 5-10 levels for maintainability and performance. Deeply nested structures are harder to work with and can cause performance issues.
+**A2.** c) Technically yes, but last value overwrites
+(While parsers handle duplicates differently, the last occurrence typically overwrites. It's not recommended.)
 
-**A4.** Technically yes, but it's not recommended. If duplicate keys exist, the last occurrence typically overwrites previous values. JSON parsers handle this differently, so it should be avoided.
+**A3.** b) 3.14
+(JSON supports decimal numbers. Hexadecimal, Infinity, and special formats are invalid.)
 
-**A5.** b) 3.14
-(JSON supports decimal numbers. Hexadecimal, Infinity, and special number formats are not valid.)
+**A4.** b) false
+(Lowercase, no quotes: `{"isActive": false}`)
 
-**A6.**
+**A5.** b) No, ignored by parsers
+(Whitespace is not significant in JSON, only used for readability.)
+
+**A6.** b) No, keys must be strings in quotes
+(Even numbers must be in quotes: `{"123": "value"}`)
+
+**A7.** b) UTF-8
+(JSON is typically encoded in UTF-8.)
+
+**A8.** c) No, comments not supported
+(JSON specification does not support comments.)
+
+**A9.** b) {} is an object with no properties, null is absence of value
+(They serve different purposes.)
+
+**A10.** b) Yes, mixed types allowed
 ```json
-[1, 2, 3]
+[1, "text", true, null, {"key": "value"}]
 ```
 
-**A7.** Simply as `false` (lowercase, no quotes): `{"isActive": false}`
+### Basic HTTP Callout in Apex
 
-**A8.** No, whitespace (spaces, tabs, newlines) is not significant in JSON. It's ignored by parsers and is only used for human readability.
+**A11.** c) Remote Site Settings configuration
+(Remote Site Settings must whitelist the endpoint URL.)
 
-**A9.** No, JSON keys must be strings. Even if they look like numbers, they must be enclosed in double quotes: `{"123": "value"}`
+**A12.** b) Stores endpoint URL and authentication in metadata
+(Benefits: secure storage, no Remote Site Settings needed, easier management.)
 
-**A10.** An empty object `{}` is a valid object with no properties, while `null` represents the absence of an object/value. They serve different purposes.
+**A13.** b) 6 MB for synchronous
+(Maximum is 6 MB for synchronous callouts, 12 MB for asynchronous.)
 
----
+**A14.** b) Debug logs in Developer Console
+(Use System.debug() and check logs in Developer Console or Setup.)
 
-## Basic HTTP Callout in Apex (Answers 11-16)
+**A15.** b) No, must use @future or Queueable
+(Triggers run synchronously and cannot make callouts directly.)
 
-**A11.** Remote Site Settings must be configured in Salesforce Setup to whitelist the external endpoint URL before making callouts.
-
-**A12.**
+**A16.** c) setTimeout(milliseconds)
 ```apex
-req.setMethod('GET');
+req.setTimeout(60000); // 60 seconds
 ```
 
-**A13.** The default timeout is 120 seconds (120,000 milliseconds).
+### JSON Parsing in Apex
 
-**A14.** Use `req.setTimeout(milliseconds)` method. For example: `req.setTimeout(60000);` for 60 seconds.
+**A17.** b) JSON.serialize()
 
-**A15.** No HTTP request is made. The request is only prepared but not executed. You must call `Http.send(req)` to actually make the callout.
+**A18.** b) Parse as strings then convert to DateTime
+(JSON represents dates as ISO 8601 strings that must be parsed.)
 
-**A16.** No, HTTP callouts cannot be made directly from triggers because triggers run synchronously. You must use @future methods or Queueable Apex to make callouts from triggers.
+**A19.** b) Controls JSON serialization access for properties
+(@JsonAccess controls whether properties are serialized, deserialized, both, or neither.)
 
----
+**A20.** a) Use JSON.deserialize() (default behavior)
+(`JSON.deserialize()` ignores unknown properties by default, unlike `deserializeStrict()`.)
 
-## JSON Parsing in Apex (Answers 17-24)
-
-**A17.** `JSON.deserializeUntyped()` returns an Object that can be cast to `Map<String, Object>` for JSON objects or `List<Object>` for JSON arrays.
-
-**A18.**
-```apex
-List<String> items = new List<String>{'a', 'b', 'c'};
-String jsonString = JSON.serialize(items);
-```
-
-**A19.** Null values in JSON are automatically handled and mapped to null in Apex. You can check for null using standard null checks: `if (obj.property != null) { ... }`
-
-**A20.** `JSON.deserialize()` requires a specific Apex type to deserialize into, providing type safety. `JSON.deserializeUntyped()` returns generic Object types (Map/List) and is more flexible for dynamic JSON structures.
-
-**A21.**
-```apex
-public class UserWrapper {
-    public UserDetail user;
-    
-    public class UserDetail {
-        public Integer id;
-        public String name;
-    }
-}
-```
-
-**A22.**
-```apex
-List<Object> items = (List<Object>) JSON.deserializeUntyped('["apple", "banana", "orange"]');
-```
-
-**A23.** `JSON.deserializeStrict()` enforces strict mode, which means it will throw an exception if the JSON contains extra properties not defined in the Apex class.
-
-**A24.** Use `JSON.deserializeUntyped()` to get a `Map<String, Object>`, then iterate through the keys:
+**A21.** b) Use JSON.deserializeUntyped() and iterate through keys
 ```apex
 Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
 for (String key : jsonMap.keySet()) {
@@ -91,13 +80,181 @@ for (String key : jsonMap.keySet()) {
 }
 ```
 
+**A22.** b) Pretty-printing adds whitespace for readability
+```apex
+String pretty = JSON.serializePretty(obj);
+```
+
+**A23.** b) Yes, using JSON.deserializeUntyped()
+```apex
+List<Object> items = (List<Object>) JSON.deserializeUntyped('["a","b","c"]');
+```
+
+**A24.** b) Throws exception if JSON has extra properties
+(Strict mode enforces exact match with Apex class structure.)
+
+### Apex Method Setup for LWC
+
+**A25.** b) Yes, unlimited
+(You can have as many @AuraEnabled methods as needed.)
+
+**A26.** b) Use try-catch and throw AuraHandledException
+```apex
+try {
+    // logic
+} catch (Exception e) {
+    throw new AuraHandledException(e.getMessage());
+}
+```
+
+**A27.** b) Yes, can use Platform Cache
+(@AuraEnabled methods can use both org cache and session cache.)
+
+**A28.** b) No, can be void
+(Methods can have void return type if they don't return data.)
+
+**A29.** b) Throws exception if exceeds governor limits
+(CPU time, heap size, and other limits apply.)
+
+**A30.** b) Yes, subject to governor limits
+(All governor limits apply including CPU time, SOQL, DML, heap size.)
+
+### Calling Apex from LWC
+
+**A31.** c) No fixed limit
+(Import as many as needed from one or multiple controllers.)
+
+**A32.** b) Promise is rejected, control passes to .catch()
+(Exception details are available in the error object.)
+
+**A33.** b) Yes, automatically serialized to JSON
+(Objects are serialized to JSON and deserialized to Apex objects.)
+
+**A34.** b) Use boolean property to track loading state
+```javascript
+this.isLoading = true;
+getData()
+    .then(result => { this.data = result; })
+    .finally(() => { this.isLoading = false; });
+```
+
+**A35.** b) Provides reactive data binding
+(@wire automatically calls Apex when parameters change.)
+
+**A36.** b) Yes, parameters must be reactive properties
+```javascript
+@wire(getDataWithParam, { paramName: '$propertyName' })
+```
+
+**A37.** b) Cacheable are read-only and can be reused, non-cacheable fetch fresh data
+(Cacheable methods allow framework caching, non-cacheable can perform DML.)
+
+**A38.** b) Cannot directly cancel once initiated
+(Track component state and ignore results if needed.)
+
+### Processing JSON Data in LWC JavaScript
+
+**A39.** c) JSON.stringify()
+
+**A40.** b) hasOwnProperty() or 'prop' in obj
+```javascript
+obj.hasOwnProperty('propName')
+'propName' in obj
+obj?.propName !== undefined
+```
+
+**A41.** b) Tests if at least one element passes condition
+```javascript
+const hasActive = items.some(item => item.active === true);
+```
+
+**A42.** d) Both b and c
+(Optional chaining `obj?.nested?.property` or manual checking both work.)
+
+**A43.** b) null is explicit "no value", undefined is unassigned
+(`null` is deliberately assigned, `undefined` means never assigned.)
+
+**A44.** c) includes()
+```javascript
+const exists = array.includes(searchValue);
+```
+
+**A45.** b) Reduces to single value by applying function
+```javascript
+const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+```
+
+### Displaying Data in LWC
+
+**A46.** b) iterator:it
+```html
+<template iterator:it={items}>
+    <div key={it.value.id}>{it.index} - {it.value.name}</div>
+</template>
+```
+
+**A47.** b) Use computed property that returns class name
+```javascript
+get computedClass() {
+    return this.isActive ? 'active' : 'inactive';
+}
+```
+
+**A48.** b) No, use nested template
+```html
+<template if:true={hasData}>
+    <template for:each={items} for:item="item" for:key={item.id}>
+        ...
+    </template>
+</template>
+```
+
+**A49.** b) Use data attributes to store item info
+```html
+<button onclick={handleClick} data-id={item.id}>Click</button>
+```
+```javascript
+handleClick(event) {
+    const itemId = event.target.dataset.id;
+}
+```
+
+**A50.** b) Format in JavaScript getter first
+```javascript
+get formattedDate() {
+    return this.dateObj.toLocaleDateString();
+}
+```
+
 ---
 
-## Apex Method Setup for LWC (Answers 25-30)
+## Section B: Coding Answers (51-60)
 
-**A25.** Yes, @AuraEnabled methods can have parameters. Parameters are automatically deserialized from the JavaScript call.
+**A51.**
+```json
+[1, 2, 3]
+```
 
-**A26.**
+**A52.**
+```apex
+req.setHeader('Authorization', 'Bearer token123');
+```
+
+**A53.**
+```apex
+List<String> items = new List<String>{'a', 'b', 'c'};
+String jsonString = JSON.serialize(items);
+```
+
+**A54.**
+```apex
+public class ApiResponse {
+    public Boolean success;
+    public List<Integer> data;
+}
+```
+
+**A55.**
 ```apex
 @AuraEnabled
 public static Integer getLength(String input) {
@@ -105,27 +262,8 @@ public static Integer getLength(String input) {
 }
 ```
 
-**A27.** `@AuraEnabled` methods are called fresh each time. `@AuraEnabled(cacheable=true)` allows LWC to cache results for improved performance, but should only be used for read-only operations that don't modify data.
-
-**A28.** No, @AuraEnabled methods must be public or global. Private methods cannot be accessed from LWC.
-
-**A29.** AuraHandledException for controlled error messages to LWC, or any standard exceptions (DmlException, QueryException, etc.). AuraHandledException provides better error messaging to the client.
-
-**A30.** Yes, @AuraEnabled methods are subject to Apex governor limits including CPU time, heap size, SOQL queries, and DML statements.
-
----
-
-## Calling Apex from LWC (Answers 31-37)
-
-**A31.** `@salesforce/apex`
-
-**A32.** Yes, you can call multiple Apex methods simultaneously using Promise.all():
+**A56.**
 ```javascript
-Promise.all([method1(), method2()]).then(results => { ... })
-```
-
-**A33.**
-```apex
 async handleLoad() {
     try {
         const result = await getData();
@@ -136,199 +274,25 @@ async handleLoad() {
 }
 ```
 
-**A34.** @wire automatically handles reactive parameters, caches data, and updates the UI when wired data changes. It's better for data that updates automatically. Imperative calls give more control over when data is fetched.
-
-**A35.** The promise is rejected and control passes to the .catch() block (or catch in try-catch for async/await). The error object contains details about the exception.
-
-**A36.** Yes, you can pass JavaScript objects which are automatically serialized to JSON and deserialized to Apex objects. The structure should match what the Apex method expects.
-
-**A37.** Use a boolean property to track loading state:
-```javascript
-this.isLoading = true;
-getData()
-    .then(result => { this.data = result; })
-    .finally(() => { this.isLoading = false; });
-```
-
----
-
-## Processing JSON Data in LWC JavaScript (Answers 38-44)
-
-**A38.** `push()` method
-
-**A39.**
-```javascript
-const exists = array.includes(searchValue);
-```
-
-**A40.** `find()` returns the first element that matches the condition (or undefined). `filter()` returns an array of all elements that match the condition.
-
-**A41.**
-```javascript
-array.sort((a, b) => a.propertyName - b.propertyName);
-```
-
-**A42.**
+**A57.**
 ```javascript
 const sum = numbers.reduce((acc, curr) => acc + curr, 0);
 ```
 
-**A43.** Use spread operator `[...array]` or `Array.from(array)` or `array.slice()`.
-
-**A44.** Destructuring extracts values from objects/arrays into variables:
+**A58.**
 ```javascript
-const {name, age} = person;
-const [first, second] = array;
+const unique = [...new Set(numbers)];
 ```
-It makes code cleaner when working with JSON data.
 
----
-
-## Displaying Data in LWC (Answers 45-50)
-
-**A45.** `for:key` attribute
-
-**A46.**
+**A59.**
 ```html
 <div if:true={hasData}>Content here</div>
 ```
 
-**A47.** Use a getter or format the date in JavaScript first, then bind to template:
-```javascript
-get formattedDate() {
-    return this.dateObj.toLocaleDateString();
-}
-```
-
-**A48.** Limited expressions are allowed. You can use property access, ternary operators, and some methods, but not complex expressions or statements.
-
-**A49.** LWC will show a warning in the console and may have rendering issues. Each item in for:each must have a unique key for proper rendering and performance.
-
-**A50.** Use conditional rendering with if:true/if:false to check array length:
-```html
-<template if:true={hasData}>
-    <template for:each={items} for:item="item" for:key={item.id}>
-        ...
-    </template>
-</template>
-<template if:false={hasData}>
-    <p>No data available</p>
-</template>
-```
-
----
-
-## Error Handling (Answers 51-54)
-
-**A51.**
+**A60.**
 ```apex
-@AuraEnabled
-public static String getData() {
-    throw new AuraHandledException('Custom error message');
-}
-```
-
-**A52.** The error object typically contains: `error.body.message`, `error.body.stackTrace`, `error.status`, and `error.statusText`.
-
-**A53.** HTTP status code 404
-
-**A54.** Check the error structure and properties:
-```javascript
-if (error.body && error.body.message) {
-    // AuraHandledException
-} else if (error.status) {
-    // Network error
-}
-```
-
----
-
-## Reactive Properties (Answers 55-57)
-
-**A55.** Yes, primitive properties are automatically reactive in LWC. Changes to them automatically trigger UI updates.
-
-**A56.** In modern LWC, you typically don't need to force re-rendering. If necessary, you can reassign the property: `this.data = [...this.data]` for arrays or `this.obj = {...this.obj}` for objects.
-
-**A57.**
-```javascript
-@api recordId;
-```
-
----
-
-## Practical Application (Answers 58-59)
-
-**A58.** Complete component design:
-
-**Apex Controller:**
-```apex
-public with sharing class WeatherController {
-    @AuraEnabled(cacheable=true)
-    public static Map<String, Object> getWeather(String city) {
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint('callout:WeatherAPI/weather?q=' + city);
-        req.setMethod('GET');
-        try {
-            Http http = new Http();
-            HttpResponse res = http.send(req);
-            if (res.getStatusCode() == 200) {
-                return (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
-            }
-            throw new AuraHandledException('Error: ' + res.getStatus());
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-}
-```
-
-**LWC JavaScript:**
-```javascript
-import { LightningElement } from 'lwc';
-import getWeather from '@salesforce/apex/WeatherController.getWeather';
-
-export default class Weather extends LightningElement {
-    temperature;
-    error;
-    city = 'London';
-
-    handleFetch() {
-        getWeather({ city: this.city })
-            .then(result => {
-                this.temperature = result.main.temp;
-                this.error = undefined;
-            })
-            .catch(error => {
-                this.error = error.body.message;
-                this.temperature = undefined;
-            });
-    }
-}
-```
-
-**A59.** Implement pagination with page tracking:
-```javascript
-export default class PaginatedList extends LightningElement {
-    pageNumber = 1;
-    pageSize = 10;
-    totalRecords = 0;
-    
-    get offset() {
-        return (this.pageNumber - 1) * this.pageSize;
-    }
-    
-    handleNext() {
-        if (this.pageNumber < this.totalPages) {
-            this.pageNumber++;
-            this.fetchData();
-        }
-    }
-    
-    handlePrevious() {
-        if (this.pageNumber > 1) {
-            this.pageNumber--;
-            this.fetchData();
-        }
-    }
+HttpResponse res = http.send(req);
+if (res.getStatusCode() != 200) {
+    throw new AuraHandledException('HTTP Error: ' + res.getStatus());
 }
 ```

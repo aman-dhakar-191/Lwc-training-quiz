@@ -1,173 +1,350 @@
 # Quiz Set 3: JSON Data Handling from APIs in LWC
 
 ## Instructions
-- Total Questions: 59
+- Total Questions: 60 (50 Multiple Choice + 10 Coding)
 - Difficulty Distribution: Easy (60%), Medium (35%), Hard (<5%)
-- Answer all questions to the best of your ability
-- For code questions, write concise, production-ready code
+- For multiple choice questions, select the best answer(s)
+- For coding questions, write concise, production-ready code
 
 ---
 
-## JSON Fundamentals (Questions 1-10)
+## Section A: Multiple Choice Questions (1-50)
 
-**Q1.** [Easy] What encoding is JSON always based on?
-a) ASCII
-b) UTF-8
-c) UTF-16
-d) ISO-8859-1
+### JSON Fundamentals
 
-**Q2.** [Easy] Can JSON contain comments?
-
-**Q3.** [Code] [Easy] Write a JSON object with two properties: `active` (boolean true) and `count` (number 5).
-
-**Q4.** [Medium] How do you represent an empty array in JSON?
-
-**Q5.** [Easy] Which character is used to separate a key from its value in JSON?
-
-**Q6.** [Medium] Is `{"name": null}` valid JSON?
-
-**Q7.** [Easy] What is the root element of a JSON document?
+**Q1.** [Easy] What is the root element of a JSON document?
 a) Must be an object
 b) Must be an array
 c) Can be either object or array
 d) Must be a string
 
-**Q8.** [Medium] Can you have a JSON array containing different data types?
+**Q2.** [Easy] Which character is used to separate a key from its value in JSON?
+a) Comma
+b) Colon
+c) Semicolon
+d) Equals
 
-**Q9.** [Medium] What's wrong with this JSON: `{name: "John", "age": 30}`?
+**Q3.** [Medium] How do you represent an empty array in JSON?
+a) null
+b) []
+c) {}
+d) ""
 
-**Q10.** [Easy] How do you escape a double quote inside a JSON string value?
+**Q4.** [Easy] Is `{"name": null}` valid JSON?
+a) No, null not allowed
+b) Yes, null is valid
+c) Only in JavaScript
+d) Depends on parser
+
+**Q5.** [Medium] What's wrong with this JSON: `{name: "John", "age": 30}`?
+a) Nothing wrong
+b) Key 'name' needs quotes
+c) Age should be string
+d) Missing brackets
+
+**Q6.** [Easy] Can you have a JSON array of arrays?
+a) No, not allowed
+b) Yes, nested arrays are valid
+c) Only two levels deep
+d) Only with objects
+
+**Q7.** [Medium] Which JSON value represents "no data"?
+a) empty string ""
+b) null
+c) undefined
+d) void
+
+**Q8.** [Easy] What is the maximum nesting depth for JSON?
+a) 10 levels
+b) 100 levels
+c) No fixed limit (implementation dependent)
+d) 5 levels
+
+**Q9.** [Medium] Are JSON property names case-sensitive?
+a) No
+b) Yes
+c) Depends on language
+d) Only for strings
+
+**Q10.** [Easy] Which is correct JSON syntax for a string with newline?
+a) "line1\nline2"
+b) "line1
+line2"
+c) 'line1\nline2'
+d) "line1\\nline2"
+
+### Basic HTTP Callout in Apex
+
+**Q11.** [Medium] What HTTP status code indicates "Not Found"?
+a) 400
+b) 401
+c) 404
+d) 500
+
+**Q12.** [Easy] What HTTP status code indicates success?
+a) 100
+b) 200
+c) 300
+d) 400
+
+**Q13.** [Medium] What's the difference between GET and POST HTTP methods?
+a) No difference
+b) GET retrieves data, POST sends/creates data
+c) GET is faster
+d) POST is deprecated
+
+**Q14.** [Easy] Can you set custom headers in HttpRequest?
+a) No
+b) Yes, using setHeader()
+c) Only Content-Type
+d) Only Authorization
+
+**Q15.** [Medium] What happens if callout endpoint is not in Remote Site Settings?
+a) Works fine
+b) Unauthorized endpoint error
+c) Timeout
+d) Returns null
+
+**Q16.** [Easy] Which method sends the actual HTTP request?
+a) HttpRequest.send()
+b) Http.send(HttpRequest)
+c) HttpRequest.execute()
+d) Http.call()
+
+### JSON Parsing in Apex
+
+**Q17.** [Medium] How do you handle a JSON array at the root level?
+a) Cannot be done
+b) Deserialize to List<WrapperClass>
+c) Only with Map
+d) Convert to object first
+
+**Q18.** [Medium] What happens to extra JSON properties not in wrapper class?
+a) Error thrown
+b) Ignored by default (unless using deserializeStrict)
+c) Stored separately
+d) Must be removed
+
+**Q19.** [Easy] Can JSON.serialize() handle Salesforce SObjects?
+a) No, not supported
+b) Yes, automatically serializes
+c) Only standard objects
+d) Only custom objects
+
+**Q20.** [Medium] How do you serialize only specific fields of an object?
+a) Cannot do it
+b) Use @JsonAccess or create specific wrapper
+c) Use JSON.filter()
+d) Modify object first
+
+**Q21.** [Hard] How do you handle polymorphic JSON where a field can be string or object?
+a) Not possible
+b) Use Object type and check instanceof
+c) Always use String
+d) Create two wrapper classes
+
+**Q22.** [Medium] What's the use of transient keyword with JSON serialization?
+a) Makes it faster
+b) Excludes field from serialization
+c) Includes field
+d) No effect
+
+**Q23.** [Easy] Does JSON.serialize() handle List and Map types?
+a) No
+b) Yes, both automatically
+c) Only List
+d) Only Map
+
+**Q24.** [Medium] How do you parse nested arrays in JSON?
+a) Flatten first
+b) Use nested List in wrapper class
+c) Not possible
+d) Use Map only
+
+### Apex Method Setup for LWC
+
+**Q25.** [Easy] What's the syntax for cacheable @AuraEnabled method?
+a) @AuraEnabled public
+b) @AuraEnabled(cacheable=true)
+c) @AuraEnabled(cache=true)
+d) @Cache @AuraEnabled
+
+**Q26.** [Medium] Can cacheable methods modify data (DML)?
+a) Yes, no restrictions
+b) No, read-only operations only
+c) Only inserts
+d) Only updates
+
+**Q27.** [Easy] What's required for @AuraEnabled method with parameters?
+a) Nothing special
+b) Parameters automatically deserialized from LWC
+c) Must use @Param annotation
+d) Parameters must be strings
+
+**Q28.** [Medium] How do you return an error message from Apex to LWC?
+a) Return null
+b) Throw AuraHandledException
+c) Use System.debug()
+d) Cannot return errors
+
+**Q29.** [Medium] Can @AuraEnabled methods call other methods?
+a) No
+b) Yes, can call any method
+c) Only static methods
+d) Only public methods
+
+**Q30.** [Easy] What return type should be used for no return data?
+a) null
+b) void
+c) String
+d) Object
+
+### Calling Apex from LWC
+
+**Q31.** [Easy] What's the pattern for imperative Apex call error handling?
+a) if-else
+b) .then().catch()
+c) try-catch only
+d) No error handling needed
+
+**Q32.** [Medium] When should you use @wire vs imperative calls?
+a) Always use @wire
+b) @wire for reactive data, imperative for user actions
+c) Always use imperative
+d) No difference
+
+**Q33.** [Medium] Can you call cacheable methods imperatively?
+a) No, only with @wire
+b) Yes, both ways work
+c) Only in production
+d) Deprecated approach
+
+**Q34.** [Easy] What does importing an Apex method return?
+a) The actual method
+b) A function that returns Promise
+c) A Promise directly
+d) An Observable
+
+**Q35.** [Medium] How do you pass an array as parameter to Apex?
+a) Cannot pass arrays
+b) Pass as JavaScript array, auto-converts to List
+c) Convert to string first
+d) Only individual elements
+
+**Q36.** [Medium] What's the advantage of cacheable Apex methods?
+a) Faster execution
+b) Results can be shared across components
+c) No governor limits
+d) Can modify data
+
+**Q37.** [Easy] Can LWC call Apex methods from different classes?
+a) No, only one class
+b) Yes, import from multiple classes
+c) Maximum two classes
+d) Only same namespace
+
+**Q38.** [Medium] How do you refresh wired data?
+a) Cannot refresh
+b) Use refreshApex() function
+c) Reload page
+d) Call again imperatively
+
+### Processing JSON Data in LWC JavaScript
+
+**Q39.** [Easy] What method removes last element from array?
+a) removeLast()
+b) delete()
+c) pop()
+d) splice()
+
+**Q40.** [Medium] What's the difference between `find()` and `filter()`?
+a) Same thing
+b) find() returns first match, filter() returns all matches
+c) filter() is faster
+d) find() modifies array
+
+**Q41.** [Easy] How do you get array length?
+a) array.size
+b) array.length
+c) array.count()
+d) array.size()
+
+**Q42.** [Medium] What does `every()` array method test?
+a) If any element passes
+b) If all elements pass condition
+c) If no elements pass
+d) Count of passing elements
+
+**Q43.** [Medium] How do you create a shallow copy of an object?
+a) object.copy()
+b) {...object} or Object.assign()
+c) object.clone()
+d) JSON.parse(JSON.stringify())
+
+**Q44.** [Medium] What's the purpose of Array.from()?
+a) Deletes array
+b) Creates array from array-like or iterable
+c) Converts to string
+d) Validates array
+
+**Q45.** [Easy] How do you sort an array of numbers?
+a) array.sort()
+b) array.sort((a, b) => a - b)
+c) Array.sort(array)
+d) array.sortNumbers()
+
+### Displaying Data in LWC
+
+**Q46.** [Easy] What's the syntax for accessing nested property in template?
+a) {object.nested.property}
+b) {object[nested][property]}
+c) {object->nested->property}
+d) {object::nested::property}
+
+**Q47.** [Medium] How do you pass data to a child component?
+a) Cannot pass data
+b) Use @api property on child
+c) Use event only
+d) Use state management
+
+**Q48.** [Medium] Can you use JavaScript expressions in templates?
+a) No
+b) Yes, limited expressions like ternary
+c) Yes, any expression
+d) Only variables
+
+**Q49.** [Easy] How do you handle empty data in templates?
+a) Always shows error
+b) Use if:true/if:false to check
+c) Automatic handling
+d) Not possible
+
+**Q50.** [Medium] What's the purpose of lwc:if directive?
+a) Deprecated
+b) Conditional rendering (newer syntax)
+c) Loop directive
+d) Event handler
 
 ---
 
-## Basic HTTP Callout in Apex (Questions 11-16)
+## Section B: Coding Questions (51-60)
 
-**Q11.** [Easy] What permission is required in a profile to make HTTP callouts?
+**Q51.** [Code] [Easy] Write a JSON object with two properties: `active` (boolean true) and `count` (number 5).
 
-**Q12.** [Medium] What is a Named Credential and why is it useful?
+**Q52.** [Code] [Easy] Write code to create an HttpRequest and set endpoint to 'https://api.example.com/data'.
 
-**Q13.** [Code] [Medium] Write code to set a request header "Authorization" with value "Bearer token123".
+**Q53.** [Code] [Easy] Write code to convert a Map to JSON string in Apex.
 
-**Q14.** [Medium] What's the maximum size of an HTTP response body in Salesforce?
+**Q54.** [Code] [Medium] Write a wrapper class for: `{"user": {"id": 1, "name": "John"}}`.
 
-**Q15.** [Easy] Which class represents the HTTP response in Apex?
+**Q55.** [Code] [Easy] Write an @AuraEnabled method that returns a List of Strings.
 
-**Q16.** [Medium] How can you debug HTTP callout requests and responses?
+**Q56.** [Code] [Medium] Write code to call an Apex method with parameters name='John' and age=30.
 
----
+**Q57.** [Code] [Easy] Write code to check if an array includes the value 'test'.
 
-## JSON Parsing in Apex (Questions 17-24)
+**Q58.** [Code] [Medium] Write a getter that returns full name from firstName and lastName properties.
 
-**Q17.** [Easy] What method converts JSON string containing an array to Apex List?
+**Q59.** [Code] [Easy] Write template code to display a list item's `name` property in a for:each loop.
 
-**Q18.** [Medium] How do you handle date/datetime values in JSON responses?
-
-**Q19.** [Code] [Easy] Write code to convert a simple Map to JSON string.
-
-**Q20.** [Medium] What's the purpose of the @JsonAccess annotation in Apex?
-
-**Q21.** [Medium] How do you ignore unknown JSON properties during deserialization?
-
-**Q22.** [Code] [Medium] Write a wrapper class for: `{"success": true, "data": [1, 2, 3]}`.
-
-**Q23.** [Hard] How do you handle polymorphic JSON (different structures for same field)?
-
-**Q24.** [Medium] What's the difference between serializing and pretty-printing JSON?
-
----
-
-## Apex Method Setup for LWC (Questions 25-30)
-
-**Q25.** [Easy] Can you have multiple @AuraEnabled methods in one Apex class?
-
-**Q26.** [Medium] What's the best practice for handling exceptions in @AuraEnabled methods?
-
-**Q27.** [Code] [Easy] Write an @AuraEnabled method that returns a List of Strings.
-
-**Q28.** [Medium] Can @AuraEnabled methods use platform caching?
-
-**Q29.** [Medium] What happens if an @AuraEnabled method takes too long to execute?
-
-**Q30.** [Easy] Must @AuraEnabled methods have a return value?
-
----
-
-## Calling Apex from LWC (Questions 31-37)
-
-**Q31.** [Easy] How many Apex methods can you import in a single LWC component?
-
-**Q32.** [Medium] What is the return type of an imported Apex method in JavaScript?
-
-**Q33.** [Code] [Medium] Write code to call an Apex method with two parameters: name and age.
-
-**Q34.** [Medium] Can you use @wire with methods that have parameters?
-
-**Q35.** [Medium] How do you cancel an in-flight Apex call?
-
-**Q36.** [Easy] What does the @wire decorator do?
-
-**Q37.** [Medium] What's the difference between cacheable and non-cacheable Apex methods for LWC?
-
----
-
-## Processing JSON Data in LWC JavaScript (Questions 38-44)
-
-**Q38.** [Code] [Easy] Write code to get the length of an array.
-
-**Q39.** [Medium] How do you check if a property exists in an object?
-
-**Q40.** [Medium] What's the purpose of the `some()` array method?
-
-**Q41.** [Code] [Medium] Write code to get unique values from an array of numbers.
-
-**Q42.** [Medium] How do you safely access nested properties that might not exist?
-
-**Q43.** [Medium] What's the difference between `null` and `undefined` in JavaScript?
-
-**Q44.** [Easy] Which method converts a JavaScript object to a JSON string?
-
----
-
-## Displaying Data in LWC (Questions 45-50)
-
-**Q45.** [Code] [Easy] Write template code to display a property named `userName`.
-
-**Q46.** [Medium] How do you add CSS classes conditionally in LWC templates?
-
-**Q47.** [Medium] Can you use template if:true and for:each on the same element?
-
-**Q48.** [Easy] What iterator directive can be used as an alternative to for:each?
-
-**Q49.** [Medium] How do you handle click events on dynamically rendered items?
-
-**Q50.** [Code] [Medium] Write a getter that returns a computed value from two properties.
-
----
-
-## Error Handling (Questions 51-54)
-
-**Q51.** [Easy] What HTTP status codes indicate client errors?
-
-**Q52.** [Medium] How do you log errors in LWC for debugging?
-
-**Q53.** [Code] [Medium] Write Apex code to check HTTP response status and throw error if not 200.
-
-**Q54.** [Medium] What's the best way to display user-friendly error messages in LWC?
-
----
-
-## Reactive Properties (Questions 55-57)
-
-**Q55.** [Code] [Easy] Write code to declare a tracked array property.
-
-**Q56.** [Medium] What happens when you modify an array element directly?
-
-**Q57.** [Medium] How do you make a property reactive to changes from parent component?
-
----
-
-## Practical Application (Questions 58-59)
-
-**Q58.** [Hard] Design a solution to handle API rate limiting when making multiple callouts from LWC.
-
-**Q59.** [Medium] How would you implement a search-as-you-type feature that calls an API endpoint?
+**Q60.** [Code] [Medium] Write code to handle error from Apex call and store error message.

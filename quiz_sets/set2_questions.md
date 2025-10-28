@@ -1,173 +1,349 @@
 # Quiz Set 2: JSON Data Handling from APIs in LWC
 
 ## Instructions
-- Total Questions: 59
+- Total Questions: 60 (50 Multiple Choice + 10 Coding)
 - Difficulty Distribution: Easy (60%), Medium (35%), Hard (<5%)
-- Answer all questions to the best of your ability
-- For code questions, write concise, production-ready code
+- For multiple choice questions, select the best answer(s)
+- For coding questions, write concise, production-ready code
 
 ---
 
-## JSON Fundamentals (Questions 1-10)
+## Section A: Multiple Choice Questions (1-50)
+
+### JSON Fundamentals
 
 **Q1.** [Easy] What is the file extension for JSON files?
+a) .js
+b) .json
+c) .txt
+d) .data
 
-**Q2.** [Easy] Which character separates key-value pairs in a JSON object?
-a) Semicolon (;)
-b) Comma (,)
-c) Pipe (|)
-d) Colon (:)
+**Q2.** [Easy] Can a JSON object have duplicate keys?
+a) Yes, recommended
+b) No, never allowed
+c) Technically yes, but last value overwrites
+d) Only in arrays
 
-**Q3.** [Medium] What is the maximum nesting depth recommended for JSON objects?
-
-**Q4.** [Easy] Can a JSON object have duplicate keys?
-
-**Q5.** [Easy] Which of these is a valid JSON number?
+**Q3.** [Easy] Which of these is a valid JSON number?
 a) 0xFF
 b) 3.14
 c) Infinity
 d) 0x10
 
-**Q6.** [Code] [Easy] Write a JSON array containing three numbers: 1, 2, and 3.
+**Q4.** [Medium] How do you represent a boolean false value in JSON?
+a) "false"
+b) false
+c) FALSE
+d) 0
 
-**Q7.** [Medium] How do you represent a boolean false value in JSON?
+**Q5.** [Medium] Is whitespace significant in JSON?
+a) Yes, very important
+b) No, ignored by parsers
+c) Only in strings
+d) Only for formatting
 
-**Q8.** [Medium] Is whitespace significant in JSON?
+**Q6.** [Easy] Can JSON keys be numbers?
+a) Yes, numbers are fine
+b) No, keys must be strings in quotes
+c) Only in arrays
+d) Only positive integers
 
-**Q9.** [Easy] Can JSON keys be numbers?
+**Q7.** [Easy] What encoding is JSON typically based on?
+a) ASCII
+b) UTF-8
+c) UTF-16
+d) ISO-8859-1
 
-**Q10.** [Medium] What's the difference between an empty object `{}` and null in JSON?
+**Q8.** [Easy] Can JSON contain comments?
+a) Yes, using //
+b) Yes, using /* */
+c) No, comments not supported
+d) Yes, using #
 
----
+**Q9.** [Medium] What's the difference between an empty object `{}` and null in JSON?
+a) They are the same
+b) {} is an object with no properties, null is absence of value
+c) null is invalid
+d) {} cannot be used
 
-## Basic HTTP Callout in Apex (Questions 11-16)
+**Q10.** [Medium] Can a JSON array contain different data types?
+a) No, must be homogeneous
+b) Yes, mixed types allowed
+c) Only primitives
+d) Only objects
 
-**Q11.** [Easy] What Salesforce setting must be configured before making HTTP callouts?
+### Basic HTTP Callout in Apex
 
-**Q12.** [Code] [Easy] Write code to set an HTTP method to GET.
+**Q11.** [Easy] What permission is needed to make HTTP callouts in Salesforce?
+a) System Administrator
+b) API Enabled permission
+c) Remote Site Settings configuration
+d) Custom permission set
 
-**Q13.** [Medium] What is the default timeout for HTTP callouts in Salesforce?
+**Q12.** [Medium] What is a Named Credential in Salesforce?
+a) A type of user credential
+b) Stores endpoint URL and authentication in metadata
+c) A custom object
+d) A report type
 
-**Q14.** [Medium] How do you set a custom timeout for an HTTP request?
+**Q13.** [Medium] What's the maximum size of an HTTP response body in Salesforce?
+a) 3 MB
+b) 6 MB for synchronous
+c) 10 MB
+d) Unlimited
 
-**Q15.** [Easy] What happens if you don't call Http.send()?
+**Q14.** [Easy] How can you debug HTTP callout requests and responses?
+a) System.debug() only
+b) Debug logs in Developer Console
+c) Cannot debug callouts
+d) Email notifications
 
-**Q16.** [Medium] Can you make HTTP callouts from triggers directly?
+**Q15.** [Medium] Can you make HTTP callouts from triggers directly?
+a) Yes, always
+b) No, must use @future or Queueable
+c) Only for GET requests
+d) Only in test methods
 
----
+**Q16.** [Medium] How do you set a custom timeout for an HTTP request?
+a) setTimeout()
+b) setTimeoutLimit()
+c) setTimeout(milliseconds)
+d) setMaxWait()
 
-## JSON Parsing in Apex (Questions 17-24)
+### JSON Parsing in Apex
 
-**Q17.** [Easy] What does JSON.deserializeUntyped() return?
+**Q17.** [Easy] What method converts a simple Map to JSON string?
+a) JSON.parse()
+b) JSON.serialize()
+c) JSON.encode()
+d) toString()
 
-**Q18.** [Code] [Easy] Write code to serialize a List of Strings to JSON.
+**Q18.** [Medium] How do you handle date/datetime values in JSON responses?
+a) They convert automatically
+b) Parse as strings then convert to DateTime
+c) Use Date JSON type
+d) Not possible
 
-**Q19.** [Medium] How do you handle null values in JSON deserialization?
+**Q19.** [Medium] What's the purpose of the @JsonAccess annotation in Apex?
+a) Controls method access
+b) Controls JSON serialization access for properties
+c) Enables JSON parsing
+d) Validates JSON
 
-**Q20.** [Medium] What's the difference between JSON.deserialize() and JSON.deserializeUntyped()?
+**Q20.** [Medium] How do you ignore unknown JSON properties during deserialization?
+a) Use JSON.deserialize() (default behavior)
+b) Use JSON.deserializeStrict()
+c) Not possible
+d) Use try-catch
 
-**Q21.** [Code] [Medium] Write a wrapper class for JSON with nested object: `{"user": {"id": 1, "name": "John"}}`.
+**Q21.** [Hard] How do you handle dynamic JSON keys that you don't know in advance?
+a) Cannot be done
+b) Use JSON.deserializeUntyped() and iterate through keys
+c) Use wrapper classes
+d) Use JSON.parse()
 
-**Q22.** [Medium] How do you parse a JSON array of strings in Apex?
+**Q22.** [Medium] What's the difference between serializing and pretty-printing JSON?
+a) No difference
+b) Pretty-printing adds whitespace for readability
+c) Pretty-printing is faster
+d) Serializing is deprecated
 
-**Q23.** [Medium] What is JSON.deserializeStrict() used for?
+**Q23.** [Easy] Can you parse a JSON array of strings in Apex?
+a) No, only objects
+b) Yes, using JSON.deserializeUntyped()
+c) Only with wrapper classes
+d) Not supported
 
-**Q24.** [Hard] How do you handle dynamic JSON keys that you don't know in advance?
+**Q24.** [Medium] What does JSON.deserializeStrict() do?
+a) Faster parsing
+b) Throws exception if JSON has extra properties
+c) Validates JSON syntax
+d) Same as deserialize()
 
----
+### Apex Method Setup for LWC
 
-## Apex Method Setup for LWC (Questions 25-30)
+**Q25.** [Easy] Can you have multiple @AuraEnabled methods in one Apex class?
+a) No, only one
+b) Yes, unlimited
+c) Maximum of 10
+d) Only in controllers
 
-**Q25.** [Easy] Can @AuraEnabled methods have parameters?
+**Q26.** [Medium] What's the best practice for handling exceptions in @AuraEnabled methods?
+a) Let them throw naturally
+b) Use try-catch and throw AuraHandledException
+c) Return null
+d) Log and ignore
 
-**Q26.** [Code] [Medium] Write an @AuraEnabled method that accepts a String parameter and returns an Integer.
+**Q27.** [Medium] Can @AuraEnabled methods use platform caching?
+a) No, not compatible
+b) Yes, can use Platform Cache
+c) Only session cache
+d) Only org cache
 
-**Q27.** [Medium] What's the difference between @AuraEnabled and @AuraEnabled(cacheable=true)?
+**Q28.** [Easy] Must @AuraEnabled methods have a return value?
+a) Yes, always
+b) No, can be void
+c) Only primitives
+d) Only objects
 
-**Q28.** [Easy] Can you use @AuraEnabled on private methods?
-
-**Q29.** [Medium] What types of exceptions can be thrown from @AuraEnabled methods?
+**Q29.** [Medium] What happens if an @AuraEnabled method takes too long?
+a) Continues indefinitely
+b) Throws exception if exceeds governor limits
+c) Automatically caches
+d) Queues for later
 
 **Q30.** [Medium] Do @AuraEnabled methods count against Apex CPU time limits?
+a) No, exempt
+b) Yes, subject to governor limits
+c) Only synchronous ones
+d) Only cacheable ones
+
+### Calling Apex from LWC
+
+**Q31.** [Easy] How many Apex methods can you import in a single LWC component?
+a) Only one
+b) Maximum 10
+c) No fixed limit
+d) Only from one class
+
+**Q32.** [Medium] What happens when an Apex method throws an exception in LWC?
+a) Component crashes
+b) Promise is rejected, control passes to .catch()
+c) Returns null
+d) Page reloads
+
+**Q33.** [Medium] Can you pass complex objects as parameters to Apex methods from LWC?
+a) No, only primitives
+b) Yes, automatically serialized to JSON
+c) Only arrays
+d) Only strings
+
+**Q34.** [Medium] How do you handle loading states while waiting for Apex response?
+a) Cannot track
+b) Use boolean property to track loading state
+c) Automatic
+d) Use @track only
+
+**Q35.** [Easy] What does the @wire decorator do?
+a) Makes methods asynchronous
+b) Provides reactive data binding
+c) Validates data
+d) Caches permanently
+
+**Q36.** [Medium] Can you use @wire with methods that have parameters?
+a) No, not supported
+b) Yes, parameters must be reactive properties
+c) Only one parameter
+d) Only string parameters
+
+**Q37.** [Medium] What's the difference between cacheable and non-cacheable Apex methods?
+a) No difference
+b) Cacheable are read-only and can be reused, non-cacheable fetch fresh data
+c) Cacheable are slower
+d) Non-cacheable cannot have parameters
+
+**Q38.** [Medium] How do you cancel an in-flight Apex call?
+a) Use cancel() method
+b) Cannot directly cancel once initiated
+c) Use stop()
+d) Close component
+
+### Processing JSON Data in LWC JavaScript
+
+**Q39.** [Easy] Which method converts a JavaScript object to a JSON string?
+a) toString()
+b) JSON.parse()
+c) JSON.stringify()
+d) serialize()
+
+**Q40.** [Medium] How do you check if a property exists in an object?
+a) obj.prop === undefined
+b) hasOwnProperty() or 'prop' in obj
+c) typeof obj.prop
+d) Object.exists()
+
+**Q41.** [Medium] What's the purpose of the `some()` array method?
+a) Returns sum
+b) Tests if at least one element passes condition
+c) Returns some elements
+d) Sorts array
+
+**Q42.** [Medium] How do you safely access nested properties that might not exist?
+a) Try-catch
+b) Optional chaining (obj?.nested?.property)
+c) Check each level manually
+d) Both b and c
+
+**Q43.** [Medium] What's the difference between `null` and `undefined` in JavaScript?
+a) Same thing
+b) null is explicit "no value", undefined is unassigned
+c) null is faster
+d) undefined is deprecated
+
+**Q44.** [Easy] Which method checks if an array contains a specific value?
+a) contains()
+b) has()
+c) includes()
+d) find()
+
+**Q45.** [Medium] What does the `reduce()` array method do?
+a) Shrinks array
+b) Reduces to single value by applying function
+c) Filters elements
+d) Sorts array
+
+### Displaying Data in LWC
+
+**Q46.** [Easy] What iterator directive can be used as alternative to for:each?
+a) for:loop
+b) iterator:it
+c) repeat
+d) while
+
+**Q47.** [Medium] How do you add CSS classes conditionally in LWC templates?
+a) Cannot do conditionally
+b) Use computed property that returns class name
+c) Use if:class
+d) Only with JavaScript
+
+**Q48.** [Medium] Can you use template if:true and for:each on the same element?
+a) Yes
+b) No, use nested template
+c) Only with iterator
+d) Only in production
+
+**Q49.** [Medium] How do you handle click events on dynamically rendered items?
+a) Cannot handle
+b) Use data attributes to store item info
+c) Use index only
+d) Separate handlers for each
+
+**Q50.** [Easy] How do you display a formatted date in LWC template?
+a) Use <date> tag
+b) Format in JavaScript getter first
+c) Automatic formatting
+d) Use date filter
 
 ---
 
-## Calling Apex from LWC (Questions 31-37)
+## Section B: Coding Questions (51-60)
 
-**Q31.** [Easy] What namespace is used to import Apex methods in LWC?
+**Q51.** [Code] [Easy] Write a JSON array containing three numbers: 1, 2, and 3.
 
-**Q32.** [Medium] Can you call multiple Apex methods simultaneously from LWC?
+**Q52.** [Code] [Medium] Write code to set a request header "Authorization" with value "Bearer token123".
 
-**Q33.** [Code] [Medium] Write code to call an Apex method using async/await pattern with error handling.
+**Q53.** [Code] [Easy] Write code to serialize a List of Strings to JSON.
 
-**Q34.** [Medium] What is the advantage of using @wire over imperative calls?
+**Q54.** [Code] [Medium] Write a simple wrapper class for JSON: `{"success": true, "data": [1, 2, 3]}`.
 
-**Q35.** [Easy] What happens when an Apex method throws an exception?
+**Q55.** [Code] [Medium] Write an @AuraEnabled method that accepts a String parameter and returns an Integer.
 
-**Q36.** [Medium] Can you pass complex objects as parameters to Apex methods from LWC?
+**Q56.** [Code] [Medium] Write code to call an Apex method using async/await pattern with try-catch.
 
-**Q37.** [Medium] How do you handle loading states while waiting for Apex response?
+**Q57.** [Code] [Medium] Write code to sum all values in an array of numbers using reduce().
 
----
+**Q58.** [Code] [Easy] Write code to get unique values from an array of numbers.
 
-## Processing JSON Data in LWC JavaScript (Questions 38-44)
+**Q59.** [Code] [Easy] Write template code to conditionally show a div when `hasData` is true.
 
-**Q38.** [Easy] Which method adds an element to the end of an array?
-
-**Q39.** [Code] [Easy] Write code to check if an array contains a specific value.
-
-**Q40.** [Medium] What's the difference between `find()` and `filter()` methods?
-
-**Q41.** [Medium] How do you sort an array of objects by a specific property?
-
-**Q42.** [Code] [Medium] Write code to sum all values in an array of numbers using reduce().
-
-**Q43.** [Medium] How do you create a shallow copy of an array in JavaScript?
-
-**Q44.** [Medium] What is destructuring and how is it useful with JSON data?
-
----
-
-## Displaying Data in LWC (Questions 45-50)
-
-**Q45.** [Easy] What attribute is used for unique identification in for:each?
-
-**Q46.** [Code] [Easy] Write template code to conditionally show a div when `hasData` is true.
-
-**Q47.** [Medium] How do you display a formatted date from a JavaScript Date object in template?
-
-**Q48.** [Medium] Can you use JavaScript expressions directly in LWC templates?
-
-**Q49.** [Easy] What happens if you don't provide a for:key in for:each?
-
-**Q50.** [Medium] How do you handle empty arrays in templates?
-
----
-
-## Error Handling (Questions 51-54)
-
-**Q51.** [Code] [Medium] Write Apex code to return a custom error message to LWC.
-
-**Q52.** [Medium] What information is available in the error object in LWC .catch() block?
-
-**Q53.** [Easy] What HTTP status code indicates "Not Found"?
-
-**Q54.** [Medium] How do you differentiate between different types of errors in LWC?
-
----
-
-## Reactive Properties (Questions 55-57)
-
-**Q55.** [Easy] Are primitive properties (String, Number, Boolean) automatically tracked in LWC?
-
-**Q56.** [Medium] How do you force a component to re-render when data changes?
-
-**Q57.** [Code] [Easy] Write code to declare a public property named 'recordId'.
-
----
-
-## Practical Application (Questions 58-59)
-
-**Q58.** [Hard] Design a complete LWC component that fetches weather data from an API and displays temperature, handling errors appropriately.
-
-**Q59.** [Medium] How would you implement pagination for API results in LWC?
+**Q60.** [Code] [Medium] Write Apex code to check HTTP response status and throw error if not 200.

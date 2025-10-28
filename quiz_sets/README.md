@@ -5,10 +5,16 @@ This repository contains three comprehensive quiz sets focused on JSON Data Hand
 ## Overview
 
 - **Total Sets**: 3
-- **Questions per Set**: 59
-- **Total Questions**: 177
+- **Questions per Set**: 60 (50 Multiple Choice + 10 Coding)
+- **Total Questions**: 180
 - **Difficulty Distribution**: Easy (60%), Medium (35%), Hard (<5%)
-- **Code Questions per Set**: 10 (with answers being one-liner or less than 5 lines)
+- **Format**: Multiple choice/select for non-coding questions, concise code answers (1-5 lines)
+
+## Structure
+
+Each set contains:
+- **50 Multiple Choice Questions**: Testing conceptual understanding with clear answer options
+- **10 Coding Questions**: Practical coding exercises with concise, production-ready answers
 
 ## Topics Covered
 
@@ -77,37 +83,64 @@ Each quiz set comprehensively covers the following topics:
 
 ```
 quiz_sets/
-├── set1_questions.md    # Quiz Set 1 Questions
-├── set1_answers.md      # Quiz Set 1 Answers
-├── set2_questions.md    # Quiz Set 2 Questions
-├── set2_answers.md      # Quiz Set 2 Answers
-├── set3_questions.md    # Quiz Set 3 Questions
-└── set3_answers.md      # Quiz Set 3 Answers
+├── set1_questions.md    # Quiz Set 1: 60 Questions (50 MC + 10 Code)
+├── set1_answers.md      # Quiz Set 1: Complete Answers
+├── set2_questions.md    # Quiz Set 2: 60 Questions (50 MC + 10 Code)
+├── set2_answers.md      # Quiz Set 2: Complete Answers
+├── set3_questions.md    # Quiz Set 3: 60 Questions (50 MC + 10 Code)
+└── set3_answers.md      # Quiz Set 3: Complete Answers
+```
+
+## Question Format
+
+### Multiple Choice Questions
+Each multiple choice question provides 4 options (a, b, c, d) with a single best answer or multiple correct answers where specified.
+
+Example:
+```
+Q: Which Apex class is used to make HTTP callouts?
+a) HTTPClient
+b) Http
+c) WebService
+d) RestClient
+
+Answer: b) Http
+```
+
+### Coding Questions
+Coding questions require concise, production-ready code answers (1-5 lines).
+
+Example:
+```
+Q: Write code to filter an array to get only items where status === 'active'.
+
+Answer:
+const activeData = data.filter(item => item.status === 'active');
 ```
 
 ## How to Use
 
-1. **For Self-Study**: Start with any set, answer questions without looking at answers first
+1. **For Self-Study**: Answer questions in Section A (Multiple Choice) first, then tackle Section B (Coding)
 2. **For Training**: Use sets sequentially, reviewing answers after each attempt
 3. **For Assessment**: Mix questions from different sets to create custom quizzes
-4. **For Interview Prep**: Focus on Hard and Medium difficulty questions
+4. **For Interview Prep**: Focus on coding questions and medium/hard difficulty questions
 
 ## Question Difficulty Breakdown
 
-Each set contains:
-- **Easy Questions**: ~35 questions (60%) - Fundamental concepts, basic syntax
+Each set contains approximately:
+- **Easy Questions**: ~36 questions (60%) - Fundamental concepts, basic syntax
 - **Medium Questions**: ~21 questions (35%) - Application, analysis, integration
 - **Hard Questions**: ~3 questions (<5%) - Complex scenarios, architecture, best practices
-- **Code Questions**: 10 questions - Practical coding with concise answers
 
 ## Features
 
+- ✅ All non-coding questions are multiple choice/select format
+- ✅ Clear separation between conceptual (MC) and practical (Coding) questions
 - ✅ Comprehensive coverage of JSON and API integration in LWC
 - ✅ Separate answer files for better learning experience
-- ✅ Mix of theoretical and practical questions
-- ✅ Code examples with production-ready snippets
 - ✅ Real-world scenarios and best practices
 - ✅ Progressive difficulty within each topic
+- ✅ Production-ready code examples
 
 ## Best Practices Covered
 
